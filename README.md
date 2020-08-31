@@ -1,5 +1,5 @@
 # About the code
-This code is a Python script utilizing jquery and Selenium. It was written to support the faciliation of a FantasyPremierLeague Classic League that I hosted for the 2020/2021 season. Most of this code will prove useful for those managing classic leagues requiring elimination.  
+This code is a Python script utilizing jquery and Selenium. It was written to support the faciliation of a FantasyPremierLeague Classic League that I hosted for the 2020/2021 season. Most of this code will prove useful for those managing classic leagues requiring weekly manager elimination.  
 Note that I have not yet coded everything.  
 Currently coded:
   1. a way to scrape the FPL website to get all the league managers' team names, team ids, and manager first and last name (See "Scraping FPL for league information")  
