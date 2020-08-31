@@ -43,7 +43,7 @@ driver.find_element_by_xpath('//*[@id="root"]/div[2]/div/div/div[1]/form/div[3]/
 
 #Step 5: Eliminate players from league
 #enter in list of eliminated people in the losers list on line 47. The format must be firstname lastname (teamname) as that is how FPL formats dropdown values
-#Ex. Manager firstname=Pablo,  lastname=Chicone, teamname=Test, see line 47. Also note that whatever manager name is, must be identical match.
+#Ex. Manager firstname=Pablo,  lastname=Chicone, teamname=Test, see line 47. Also note that whatever manager name is, must be identical match- even capitalization.
 losers=['Pablo Chicone (Test)']
 #go through list of losers and manually remove them from the league
 for loser in losers:
