@@ -1,0 +1,40 @@
+#Gathers teamID(entry)teamName(entry_name) manager first and last name and time they joined the league
+#import important tools
+import requests
+import pandas as pd
+import numpy as np
+
+#define the Urls from which you will pull the data. The range for i is based on the number of pages the league takes up
+#50 teams per page for the 2020/2021 season and 10 pages of participants 
+leagueUrls=[]
+leagueCode=269830
+for i in range(1,11):
+    fullUrl  = 'https://fantasy.premierleague.com/api/leagues-classic/'+str(leagueCode)+'/standings/?page_new_entries=' + str(i) +"&page_standings=1"
+    leagueUrls.append(fullUrl)
+print(leagueUrls)
+
+#in case login is required but I did not fill this out apparently
+session = requests.session()
+url = 'https://users.premierleague.com/accounts/login/'
+payload = {
+ 'password': '<YOUR PASSWORD>',
+ 'login': '<YOUR EMAIL>',
+ 'redirect_uri': 'https://fantasy.premierleague.com/a/login',
+ 'app': 'plfpl-web'
+}
+session.post(url, data=payload)
+
+#time to grab the variables for the league teams
+leagueInfo=[]
+for leagueUrl in leagueUrls:
+    r = requests.get(leagueUrl)
+    json = r.json()
+    json.keys()
+    Test=(json['new_entries'])
+    team=Test['results']
+    #create dataframe and append together for each Url
+    leagueInfo.append(pd.DataFrame(team))  
+#concatenate the DFs together
+result=pd.concat(leagueInfo)
+#export to excel
+result.to_excel(r'C:\Users\ccicone.04stang\Dropbox (Personal)\Arbitrary.xlsx', index = False)
