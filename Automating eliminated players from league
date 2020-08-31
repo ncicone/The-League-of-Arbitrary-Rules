@@ -1,0 +1,84 @@
+#Removing players from league using selenium
+#I do this for a classic league only, not H2H, so use at own risk
+
+#Step 1: Install Selenium and important packages
+# Selenium import
+#pip install selenium
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import time
+driver= webdriver.Chrome(r'C:\Users\ccicone.04stang\Documents\Python Scripts\chromedriver.exe')
+
+#Step 2: J-Query
+#You need to download jquery for this step. I believe I downloaded it locally and then installed it from the download
+def goUrl(url):
+    #navigate to url
+    driver.get(url) 
+    # load jquery 
+    with open(r'PATH\Python Scripts\jquery-3.2.1.js', 'r') as jquery_js:         
+        # read and parse jquery lib
+        driver.execute_script( jquery_js.read() ) 
+    return# helper function that navigates to a page, and then reads jquery from disk
+   
+#Step 3: Try to go to the admin page of your league. FPL should redirect you to login page
+# use goUrl function to navigate to url and inject jquery
+# replace LEAGUEID with you league's ID
+goUrl("https://fantasy.premierleague.com/leagues/LEAGUEID/admin/c")
+
+#Step 4: Login
+driver.implicitly_wait(1)
+# Find the HTML element for username, and fill in your name- replace USERNAME and PASSWORD on lines 34 and 35
+myName = 'USERNAME'
+myPassword = 'PASSWORD!'
+# fill out username and password
+#use the ID field. inspect page, then find the specific field. Right click and copy JS, it gave the loginUsername/Password 
+driver.execute_script("$('#loginUsername').val('" + myName + "')")
+driver.execute_script("$('#loginPassword').val('" + myPassword + "')")
+
+# click submit button- inspected the button and copy xpath value- I imagine this is the same for everyone;
+driver.find_element_by_xpath('//*[@id="root"]/div[2]/div/div/div[1]/form/div[3]/button').click()
+
+#Step 5: Eliminate players from league
+#enter in list of eliminated people in the losers list on line 47. The format must be Firstname Lastname (TeamName) as that is how FPL formats dropdown values
+#Ex. Manager Firstname=Pablo,  Lastname=Chicone, TeamName=Test, see line 47
+losers=['Pablo Chicone (Test)']
+#go through list of losers and manually remove them from the league
+for loser in losers:
+    # use goUrl function to navigate to url and inject jquery into the admin page; replace LEAGUEID with your specific league ID
+    goUrl("https://fantasy.premierleague.com/leagues/LEAGUEID/admin/c")
+    time.sleep(1)
+    #send first name
+    driver.find_element_by_xpath('//*[@id="downshift-0-label"]').send_keys(loser)
+    #send space bar to get FPL site to create dropdown box
+    driver.find_element_by_xpath('//*[@id="downshift-0-label"]').send_keys(Keys.SPACE)
+    #wait until drop down appears
+    time.sleep(2)
+    text=[]
+    #maybe try grabbing a list of all the drop down options text and clicking if text matches loser
+    i=0
+    while str(loser) != str(text):
+        try:
+            xpathy='//*[@id="downshift-0-item-'+ str(i)+'"]'
+            text = driver.find_element_by_xpath(xpathy).text
+            if str(text)==str(loser):
+                #select loser from dropdown that appears
+                driver.find_element_by_xpath(xpathy).click()
+                time.sleep(1)
+                #click suspend player button
+                driver.find_element_by_xpath('//*[@id="root"]/div[2]/div/div/div/form[2]/div[2]/button').click()
+                print(loser)
+                break
+            #choose number of names in the dropdown you want to check before giving up
+            #stops infinite loop if unable to locate player to suspend after i iterations- I think unnecessary because of try and except statements now
+            #elif i==5:
+                #print(loser + ' failed to remove')
+                #break
+            else:
+                i=i+1
+        except:
+            #if code fails, show which player was not removed so you have list of manual removals
+            print(loser + ' failed to remove')
+            break
