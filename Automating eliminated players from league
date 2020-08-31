@@ -25,7 +25,7 @@ def goUrl(url):
    
 #Step 3: Try to go to the admin page of your league. FPL should redirect you to login page
 # use goUrl function to navigate to url and inject jquery
-# replace LEAGUEID with you league's ID
+# replace LEAGUEID with your league's ID
 goUrl("https://fantasy.premierleague.com/leagues/LEAGUEID/admin/c")
 
 #Step 4: Login
