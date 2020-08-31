@@ -1,3 +1,12 @@
+This code is a Python script utilizing jquery and Selenium. It was written to support the faciliation of a FantasyPremierLeague Classic League that I hosted for the 2020/2021 season. 
+Note that I have not yet coded everything. 
+What I have coded is: (1) a way to scrape the FPL website to get all the league managers' team names, team ids, and manager first and last name
+                      (2) a way to automate the removal of players from the league once eliminated
+The code accomplishing (1) is titled- Scraping FPL for league information
+The code accomplishing (2) is titled- Automating eliminated players from league
+
+
+The following is info on the League I hosted
 # The-League-of-Arbitrary-Rules
 This is the code file for The League of Arbitrary Rules- a Fantasy Premier League run on fantasy.premierleague.com.
 Rules for the league:
@@ -11,7 +20,3 @@ Rules for the league:
   8. as an exception, if my own team finishes with a round number, I will not eliminate it so I can continue to administer the league. However, my team would be eliminated and no         longer included in any calculations going forward
   9. no new teams will be admitted to the league after GW1
   10. one team per manager
- 
-I have not coded everything entirely yet. What I have coded is: (1) a way to scrape the FPL website to get all the league managers' team names, team ids, and manager first and last name; (2) a way to automate the removal of players from the league once eliminated.
-The code accomplishing (1) is titled- Scraping FPL for league information
-The code accomplishing (2) is titled- Automating eliminated players from league
