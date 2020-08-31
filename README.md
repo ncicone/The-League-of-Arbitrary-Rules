@@ -2,10 +2,10 @@
 This code is a Python script utilizing jquery and Selenium. It was written to support the faciliation of a FantasyPremierLeague Classic League that I hosted for the 2020/2021 season. Most of this code will prove useful for those managing classic leagues requiring elimination.
 Note that I have not yet coded everything. 
 Currently coded:
-    (1) a way to scrape the FPL website to get all the league managers' team names, team ids, and manager first and last name (See "Scraping FPL for league information")
-    (2) a way to automate the removal of players from the league once eliminated (See "Automating eliminated players from league")
+    1. a way to scrape the FPL website to get all the league managers' team names, team ids, and manager first and last name (See "Scraping FPL for league information")
+    2. a way to automate the removal of players from the league once eliminated (See "Automating eliminated players from league")
 Need to code:
-    (3) collecting manager GW score and total score, automatically calculating the number of eliminated managers and the elimination thresholds.. may just do in Excel each week so         don't count on this being uploaded
+    3. collecting manager GW score and total score, automatically calculating the number of eliminated managers and the elimination thresholds.. may just do in Excel each week so         don't count on this being uploaded
 
 
 The following is info on the League I hosted
